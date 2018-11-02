@@ -34,8 +34,8 @@ public final class TimedLimiter: SyncLimiter {
 			// Lookup last executed
 			let timeInterval = now.timeIntervalSince(lastExecutedAt ?? .distantPast)
 
-			// If the time since last execution is greater than the limit, execute
-			if timeInterval > limit {
+			// If the time since last execution is greater than the limit, or if user change To early time, execute
+			if timeInterval > limit || timeInterval < 0 {
 				// Record execution
 				lastExecutedAt = now
 
